@@ -18,6 +18,7 @@ export interface Products {
   isCold: boolean;
   isHot: boolean;
   category: string;
+  description: string;
   size: string;
   qty?: number;
   createdAt?: Timestamp;

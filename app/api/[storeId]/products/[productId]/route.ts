@@ -28,6 +28,7 @@ export const PATCH = async (
       images,
       isFeatured,
       isArchived,
+      description,
       category,
       size,
       isHot,
@@ -70,6 +71,7 @@ export const PATCH = async (
           images,
           isFeatured,
           isArchived,
+          description,
           category,
           size,
           isCold,
@@ -156,7 +158,6 @@ export const GET = async (
   { params }: { params: { storeId: string; productId: string } }
 ) => {
   try {
-
     if (!params.storeId) {
       return new NextResponse("Store Id is required", { status: 400 });
     }
@@ -175,4 +176,4 @@ export const GET = async (
     console.log(`PRODUCT_GET:${error}`);
     return new NextResponse("Internal Server ERR", { status: 500 });
   }
-}
+};

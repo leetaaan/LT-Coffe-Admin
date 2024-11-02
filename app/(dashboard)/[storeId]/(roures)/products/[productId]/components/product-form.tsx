@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 import { Category, Products, Size } from "@/types-db";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -41,6 +42,7 @@ interface ProductFormProps {
 }
 const formSchema = z.object({
   name: z.string().min(1),
+  description: z.string().optional(),
   size: z.string().optional(),
   category: z.string().min(1),
   price: z.coerce.number().min(1),
@@ -64,6 +66,7 @@ export const ProductForm = ({
       isFeatured: false,
       isArchived: false,
       category: "",
+      description:"",
       size: "",
       isCold: false,
       isHot: false,
@@ -107,8 +110,6 @@ export const ProductForm = ({
     try {
       setIsLoading(true);
       await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
-
-      // router.refresh();
       location.reload();
       toast.success("Product Deleted");
       router.push(`/${params.storeId}/products`);
@@ -202,6 +203,24 @@ export const ProductForm = ({
                       type="number"
                       disabled={isLoading}
                       placeholder="0"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className="resize-none"
+                      disabled={isLoading}
+                      placeholder="Product name..."
                       {...field}
                     />
                   </FormControl>

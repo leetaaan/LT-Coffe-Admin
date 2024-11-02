@@ -12,6 +12,7 @@ export type ProductsColumns = {
   isFeatured: boolean;
   isArchived: boolean;
   category: string;
+  description: string;
   size: string;
   isCold: boolean;
   isHot: boolean;
@@ -33,6 +34,10 @@ export const columns: ColumnDef<ProductsColumns>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "description",
+    header: "Description"
   },
   {
     accessorKey: "price",
